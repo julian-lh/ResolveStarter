@@ -10,6 +10,10 @@
 		93313641250B6C4B008EB87C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93892FA6250A6614006DAFF3 /* AppDelegate.swift */; };
 		93313642250B6C4D008EB87C /* DirectoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9331363F250B6B1B008EB87C /* DirectoryManager.swift */; };
 		93313643250B6C4F008EB87C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93892FA8250A6614006DAFF3 /* ContentView.swift */; };
+		9371BE23251CBCDD00373078 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9371BE22251CBCDD00373078 /* SettingsView.swift */; };
+		9371BE25251CBD2A00373078 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9371BE24251CBD2A00373078 /* GeneralSettingsView.swift */; };
+		9371BE27251CC41A00373078 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9371BE26251CC41A00373078 /* Settings.swift */; };
+		9371BE2A251CC8F800373078 /* NSWindow+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9371BE29251CC8F800373078 /* NSWindow+Utils.swift */; };
 		93892FAB250A6628006DAFF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93892FAA250A6628006DAFF3 /* Assets.xcassets */; };
 		93892FAE250A6628006DAFF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93892FAD250A6628006DAFF3 /* Preview Assets.xcassets */; };
 		93892FB1250A6628006DAFF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93892FAF250A6628006DAFF3 /* Main.storyboard */; };
@@ -17,6 +21,10 @@
 
 /* Begin PBXFileReference section */
 		9331363F250B6B1B008EB87C /* DirectoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryManager.swift; sourceTree = "<group>"; };
+		9371BE22251CBCDD00373078 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		9371BE24251CBD2A00373078 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
+		9371BE26251CC41A00373078 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		9371BE29251CC8F800373078 /* NSWindow+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Utils.swift"; sourceTree = "<group>"; };
 		93892FA3250A6614006DAFF3 /* ResolveStarter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ResolveStarter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93892FA6250A6614006DAFF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93892FA8250A6614006DAFF3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,6 +46,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9371BE28251CC42600373078 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				9371BE22251CBCDD00373078 /* SettingsView.swift */,
+				9371BE24251CBD2A00373078 /* GeneralSettingsView.swift */,
+				9371BE26251CC41A00373078 /* Settings.swift */,
+				9371BE29251CC8F800373078 /* NSWindow+Utils.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
 		93892F9A250A6613006DAFF3 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +79,7 @@
 				93892FA6250A6614006DAFF3 /* AppDelegate.swift */,
 				9331363F250B6B1B008EB87C /* DirectoryManager.swift */,
 				93892FA8250A6614006DAFF3 /* ContentView.swift */,
+				9371BE28251CC42600373078 /* Preferences */,
 				93892FAA250A6628006DAFF3 /* Assets.xcassets */,
 				93892FAF250A6628006DAFF3 /* Main.storyboard */,
 				93892FB2250A6628006DAFF3 /* Info.plist */,
@@ -148,7 +168,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9371BE27251CC41A00373078 /* Settings.swift in Sources */,
 				93313641250B6C4B008EB87C /* AppDelegate.swift in Sources */,
+				9371BE2A251CC8F800373078 /* NSWindow+Utils.swift in Sources */,
+				9371BE25251CBD2A00373078 /* GeneralSettingsView.swift in Sources */,
+				9371BE23251CBCDD00373078 /* SettingsView.swift in Sources */,
 				93313642250B6C4D008EB87C /* DirectoryManager.swift in Sources */,
 				93313643250B6C4F008EB87C /* ContentView.swift in Sources */,
 			);

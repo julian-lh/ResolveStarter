@@ -13,7 +13,9 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
-
+    var settingsView: SettingsView?
+    let settings = Settings()
+    
     func openApp(_ named: String) -> Bool {
         return NSWorkspace.shared.launchApplication(named)
     }
@@ -37,8 +39,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
                 backing: .buffered, defer: false)
             window.center()
+            window.title = "ResolveStarter - NO QUICKTIME!1!"
             window.setFrameAutosaveName("Main Window")
-            window.contentView = NSHostingView(rootView: contentView)
+            window.contentView = NSHostingView(rootView: contentView.environmentObject(settings))
             window.makeKeyAndOrderFront(nil)
             
         }
@@ -50,6 +53,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
 
+    @IBAction func preferencesClicked(_ sender: Any) {
+        if let settingsView = settingsView, settingsView.settingsWindowDelegate.windowIsOpen {
+            settingsView.window.makeKeyAndOrderFront(self)
+        } else {
+            settingsView = SettingsView(settings: settings)
+        }
+    }
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
