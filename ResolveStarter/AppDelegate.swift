@@ -22,13 +22,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        let directoryManager = DirectoryManager()
+        let directoryManager = DirectoryManager(settings: settings)
         if (directoryManager.rawConnected && directoryManager.framestoreConnected) {
             if openApp("DaVinci Resolve") {
                 print(true)
             }
             NSApplication.shared.terminate(self)
         }else{
+            
+            UserDefaults.standard.register(defaults: [
+            "UseDirectoryOne": true,
+            "UseDirectoryTwo": true,
+            "directoryOne": "/Volumes/raw",
+            "directoryTwo": "/Volumes/Resolve-Framestore"
+            ])
             
             // Create the SwiftUI view that provides the window contents.
             let contentView = ContentView(directoryManager: directoryManager)

@@ -108,7 +108,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let directoryManager = DirectoryManager()
+        let directoryManager = DirectoryManager(settings: Settings())
         return ContentView(directoryManager: directoryManager)
     }
 }

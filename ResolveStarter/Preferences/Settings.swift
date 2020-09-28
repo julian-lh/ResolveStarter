@@ -11,12 +11,12 @@ import Foundation
 
 class Settings: ObservableObject {
     
-    
+    /*
     @Published var showCopyright: Bool = UserDefaults.standard.bool(forKey: "showCopyright") {
         didSet {
             UserDefaults.standard.set(self.showCopyright, forKey: "showCopyright")
         }
-    }
+    }*/
     @Published var useDirectoryOne: Bool = UserDefaults.standard.bool(forKey: "UseDirectoryOne") {
         didSet {
             UserDefaults.standard.set(self.useDirectoryOne, forKey: "UseDirectoryOne")
