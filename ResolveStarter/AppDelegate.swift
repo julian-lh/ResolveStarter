@@ -38,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             ])
             
             // Create the SwiftUI view that provides the window contents.
-            let contentView = ContentView(directoryManager: directoryManager)
+            let contentView = ContentView(directoryManager: directoryManager, settings: settings)
             
             // Create the window and set the content view.
             window = NSWindow(

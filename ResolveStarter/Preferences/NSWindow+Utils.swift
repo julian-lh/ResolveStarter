@@ -22,3 +22,19 @@ extension NSWindow {
     }
     
 }
+extension String {
+    func deletePrefix() -> String {
+        var result = self
+        if result.hasPrefix("/Volumes/"){
+            result = String(result.dropFirst("/Volumes/".count))
+        }else {/*
+            while result.hasPrefix("/"){
+                result = String(result.dropFirst("/".count))
+            }*/
+            while let index = result.range(of: "/")?.upperBound{
+                result = String(result[index...])
+            }
+        }
+        return result
+    }
+}

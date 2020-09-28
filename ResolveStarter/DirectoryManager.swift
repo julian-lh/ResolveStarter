@@ -16,6 +16,7 @@ class DirectoryManager: ObservableObject {
     @Published var framestoreConnected = false
     var settings = Settings()
     
+    
     func checkConnection(atPath: String) -> Bool{
         var isConnected = false
         

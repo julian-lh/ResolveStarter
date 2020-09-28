@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     //var missingDirectories: [String]
     @ObservedObject var directoryManager: DirectoryManager
+    @ObservedObject var settings: Settings
     
     fileprivate func errorIcon() -> some View {
         return Circle()
@@ -78,10 +79,10 @@ struct ContentView: View {
                     }
             }
 
-            
+            //Text(settings.directoryTwo.deletePrefix())
             HStack(spacing: 30){
-                driveIcon(label: "Babo/raw", connected: directoryManager.rawConnected)
-                driveIcon(label: "Resolve-Framestore", connected: directoryManager.framestoreConnected)
+                driveIcon(label: (settings.useDirectoryOne ? settings.directoryOne.deletePrefix():"Babo/raw"), connected: directoryManager.rawConnected)
+                driveIcon(label: (settings.useDirectoryTwo ? settings.directoryTwo.deletePrefix():"Resolve-Framestore"), connected: directoryManager.framestoreConnected)
                 
             }.transition(.opacity)
             
@@ -108,7 +109,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let directoryManager = DirectoryManager(settings: Settings())
-        return ContentView(directoryManager: directoryManager)
+        let settings = Settings()
+        let directoryManager = DirectoryManager(settings: settings)
+        return ContentView(directoryManager: directoryManager, settings: settings)
     }
 }
