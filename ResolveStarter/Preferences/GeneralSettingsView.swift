@@ -9,39 +9,55 @@
 import SwiftUI
 
 struct GeneralSettingsView: View {
-    /*@AppStorage("showPreview")*/ @State private var showPreview = true
-    /*@AppStorage("fontSize")*/ @State private var fontSize = 12.0
+    @State private var showPreview = true
+    @State private var fontSize = 12.0
     @ObservedObject var settings: Settings
 
+    func fileManager() -> String {
+        let dialog = NSOpenPanel();
+           
+        dialog.title                   = "Choose a Volume or Directory";
+        dialog.showsResizeIndicator    = true;
+        dialog.showsHiddenFiles        = false;
+        dialog.canChooseDirectories    = true;
+        dialog.canCreateDirectories    = true;
+        dialog.canChooseFiles          = true
+        dialog.allowsMultipleSelection = false;
+        dialog.directoryURL = NSURL.fileURL(withPath: "/Volumes/", isDirectory: true)
+
+        var path = ""
+        
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+            let result = dialog.url // Pathname of the file
+               
+               if (result != nil) {
+                path = result!.path
+               }
+           }
+        return path
+    }
     
     
     var body: some View {
-        /*Form {
-            Toggle("Activate", isOn: settings.)
-            Slider(value: $fontSize, in: 9...96) {
-                Text(settings.DirectoryOne)
-            }
-        }
-        .padding(20)
-        .frame(width: 350, height: 100)*/
+        
         Form{
             HStack(){
-                Toggle("Custom Path 1", isOn: $settings.useDirectoryOne)
+                Toggle("Use Custom Path 1", isOn: $settings.useDirectoryOne)
                 TextField("/Volumes/VOLUME_NAME1", text: $settings.directoryOne)
                     .disabled(!settings.useDirectoryOne)
                     .opacity(!settings.useDirectoryOne ? /*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/ : 1.0)
-                /*Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {self.settings.directoryOne = String(self.fileManager())}) {
                     Text("⚲").rotationEffect(.degrees(-45.0))
-                }*/
+                }
             }
             HStack(){
-                Toggle("Custom Path 2", isOn: $settings.useDirectoryTwo)
+                Toggle("Use Custom Path 2", isOn: $settings.useDirectoryTwo)
                 TextField("/Volumes/VOLUME_NAME2", text: $settings.directoryTwo)
                     .disabled(!settings.useDirectoryTwo)
                     .opacity(!settings.useDirectoryTwo ? /*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/ : 1.0)
-                /*Button(action:{}) {
+                Button(action:{self.settings.directoryTwo = String(self.fileManager())}) {
                     Text("⚲").rotationEffect(.degrees(-45.0))
-                }*/
+                }
             }
         }
         .padding(20)

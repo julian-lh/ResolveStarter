@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         let directoryManager = DirectoryManager(settings: settings)
-        if (directoryManager.rawConnected && directoryManager.framestoreConnected) {
+        if (directoryManager.checkAllConnections()) {
             if openApp("DaVinci Resolve") {
                 print(true)
             }

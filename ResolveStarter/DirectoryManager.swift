@@ -34,7 +34,7 @@ class DirectoryManager: ObservableObject {
     }
     
     
-    func checkAllConnections(){
+    func checkAllConnections()-> Bool{
         var pathOne = "/Volumes/raw"
         if settings.useDirectoryOne {
             pathOne = settings.directoryOne
@@ -46,6 +46,17 @@ class DirectoryManager: ObservableObject {
             pathTwo = settings.directoryTwo
         }
         self.framestoreConnected = checkConnection(atPath: pathTwo)
+        
+        
+        var connected = false
+        if (self.rawConnected && self.framestoreConnected){
+            connected = true
+        }/*else{
+            print("firstDirectory: " + String(self.rawConnected))
+            print("secondDirectory: " + String(self.framestoreConnected))
+        }*/
+        return connected
+ 
     }
     
     
