@@ -14,6 +14,8 @@ class DirectoryManager: ObservableObject {
     
     @Published var rawConnected = false
     @Published var framestoreConnected = false
+    var settings = Settings()
+    
     
     func checkConnection(atPath: String) -> Bool{
         var isConnected = false
@@ -32,9 +34,29 @@ class DirectoryManager: ObservableObject {
     }
     
     
-    func checkAllConnections(){
-        self.rawConnected = checkConnection(atPath: "/Volumes/raw")
-        self.framestoreConnected = checkConnection(atPath: "/Volumes/Resolve-Framestore")
+    func checkAllConnections()-> Bool{
+        var pathOne = "/Volumes/raw"
+        if settings.useDirectoryOne {
+            pathOne = settings.directoryOne
+        }
+        self.rawConnected = checkConnection(atPath: pathOne)
+        
+        var pathTwo = "/Volumes/Resolve-Framestore"
+        if settings.useDirectoryTwo {
+            pathTwo = settings.directoryTwo
+        }
+        self.framestoreConnected = checkConnection(atPath: pathTwo)
+        
+        
+        var connected = false
+        if (self.rawConnected && self.framestoreConnected){
+            connected = true
+        }/*else{
+            print("firstDirectory: " + String(self.rawConnected))
+            print("secondDirectory: " + String(self.framestoreConnected))
+        }*/
+        return connected
+ 
     }
     
     
@@ -67,9 +89,10 @@ class DirectoryManager: ObservableObject {
         return allDirsConnected//(allDirsConnected, "test")
     }
     
-    init() {
+    init(settings: Settings) {
         checkAllConnections()
         _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
+        self.settings = settings
     }
     @objc func update() {
         checkAllConnections()

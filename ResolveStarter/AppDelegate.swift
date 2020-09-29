@@ -13,23 +13,32 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
-
+    var settingsView: SettingsView?
+    let settings = Settings()
+    
     func openApp(_ named: String) -> Bool {
         return NSWorkspace.shared.launchApplication(named)
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        let directoryManager = DirectoryManager()
-        if (directoryManager.rawConnected && directoryManager.framestoreConnected) {
+        let directoryManager = DirectoryManager(settings: settings)
+        if (directoryManager.checkAllConnections()) {
             if openApp("DaVinci Resolve") {
                 print(true)
             }
             NSApplication.shared.terminate(self)
         }else{
             
+            UserDefaults.standard.register(defaults: [
+            "UseDirectoryOne": true,
+            "UseDirectoryTwo": true,
+            "directoryOne": "/Volumes/raw",
+            "directoryTwo": "/Volumes/Resolve-Framestore"
+            ])
+            
             // Create the SwiftUI view that provides the window contents.
-            let contentView = ContentView(directoryManager: directoryManager)
+            let contentView = ContentView(directoryManager: directoryManager, settings: settings)
             
             // Create the window and set the content view.
             window = NSWindow(
@@ -37,8 +46,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
                 backing: .buffered, defer: false)
             window.center()
+            window.title = "ResolveStarter - NO QUICKTIME!1!"
             window.setFrameAutosaveName("Main Window")
-            window.contentView = NSHostingView(rootView: contentView)
+            window.contentView = NSHostingView(rootView: contentView.environmentObject(settings))
             window.makeKeyAndOrderFront(nil)
             
         }
@@ -50,6 +60,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
 
+    @IBAction func preferencesClicked(_ sender: Any) {
+        if let settingsView = settingsView, settingsView.settingsWindowDelegate.windowIsOpen {
+            settingsView.window.makeKeyAndOrderFront(self)
+        } else {
+            settingsView = SettingsView(settings: settings)
+        }
+    }
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
